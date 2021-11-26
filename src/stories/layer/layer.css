@@ -1,0 +1,47 @@
+.layer {
+    width: 200px;
+    height: 200px;
+    border-radius: 10%;
+    position: fixed;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-size: 0;
+    line-height: 0;
+    top: 50%;
+    left: 50%;
+    opacity: 0.85;
+    cursor: pointer;
+    transform: translate(-50%, -50%) rotateX(-70deg) rotate(60deg);
+    transition: all 0.4s ease-in-out;
+    will-change: opacity, margin-top;
+}
+
+.layer:nth-child(1) {
+    margin-top: 60px;
+    animation: slidein 0.4s ease-in-out;
+    box-shadow: 50px 30px 60px -4px #B0BEC5;
+}
+
+.layer:nth-child(2) {
+    margin-top: 40px;
+}
+
+.layer:nth-child(3) {
+    margin-top: 20px;
+}
+
+.layer:nth-child(4) {
+    margin-top: 0;
+}
+
+@keyframes slidein {
+    from {
+        margin-top: 80px;
+    }
+
+    to {
+        margin-top: 60px;
+    }
+}

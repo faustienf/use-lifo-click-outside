@@ -1,0 +1,27 @@
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 300px;
+    box-sizing: border-box;
+    border-radius: 8px;
+    transform: translate(-50%, -50%);
+    padding: 24px;
+    padding-top: 8px;
+    background-color: #fff;
+    border: 1px solid #E8EAF6;
+    box-shadow: 0px 4px 16px 2px #E8EAF6;
+}
+
+.modal-title {
+    font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    font-weight: normal;
+    letter-spacing: 4px;
+    line-height: 2;
+    text-transform: uppercase;
+    margin: 0;
+    border-bottom: 1px solid #E8EAF6;
+    margin-bottom: 24px;
+    color: rgba(0, 0, 0, 0.8)
+}
