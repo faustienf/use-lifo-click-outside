@@ -30,7 +30,7 @@ export const useOnClickOutside = (
   ref: RefObject<HTMLElement>,
   callback: (event: MouseEvent | TouchEvent) => void,
 ): void => {
-  const addListener = useStackListeners();
+  const addListener = useStackListeners('click-outside');
 
   useEffect(
     () => addListener(
@@ -38,7 +38,7 @@ export const useOnClickOutside = (
       (next, event) => {
         const target = ref.current;
         if (!target) {
-          return next();
+          return next(); // skip current handling and call next listener
         }
 
         const [pageX, pageY] = getPoint(event);

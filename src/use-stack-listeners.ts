@@ -14,21 +14,29 @@ type Listener<EK extends EventKey[] = EventKey[]> = (
   next: Next,
   event: Events<EK>
 ) => boolean | void;
+type Scheduler<E extends Event = Event> = (event: E) => void;
 
 // helpers for breaking loop .every()
 const next: Next = () => true;
 const stop: Stop = () => false;
 
-const listeners: Listener[] = [];
+const listenersMap: Record<string, Listener[]> = {};
+const schedulersMap: Record<string, Scheduler> = {};
 
-const addListener = <L extends Listener>(newListener: L): void => {
-  listeners.unshift(newListener);
+const addListener = <N extends string, L extends Listener>(
+  namespace: N,
+  newListener: L,
+): void => {
+  listenersMap[namespace].unshift(newListener);
 };
 
-const removeListener = <L extends Listener>(targetListener: L): void => {
-  listeners.every((listener, index) => {
+const removeListener = <N extends string, L extends Listener>(
+  namespace: N,
+  targetListener: L,
+): void => {
+  listenersMap[namespace].every((listener, index) => {
     if (listener === targetListener) {
-      listeners.splice(index, 1);
+      listenersMap[namespace].splice(index, 1);
       return stop();
     }
 
@@ -36,35 +44,56 @@ const removeListener = <L extends Listener>(targetListener: L): void => {
   });
 };
 
-const scheduler = <EK extends EventKey[]>(event: Events<EK>): void => {
-  listeners.every((listener) => listener(next, event));
+const scheduler = <N extends string, EK extends EventKey[]>(
+  namespace: N,
+  event: Events<EK>,
+): void => {
+  listenersMap[namespace].every((listener) => listener(next, event));
 };
 
-const subscribeOnce = <EK extends EventKey[]>(events: EK): void => {
-  if (!listeners.length) {
+const subscribeOnce = <N extends string, EK extends EventKey[]>(
+  namespace: N,
+  events: EK,
+): void => {
+  if (!schedulersMap[namespace]) {
+    schedulersMap[namespace] = (event) => scheduler(namespace, event);
+  }
+
+  if (!listenersMap[namespace]) {
+    listenersMap[namespace] = [];
+  }
+
+  if (!listenersMap[namespace].length) {
     events.forEach((event) => {
-      window.addEventListener(event, scheduler);
+      window.addEventListener(event, schedulersMap[namespace]);
     });
   }
 };
 
-const unsubscribeOnce = <EK extends EventKey[]>(events: EK): void => {
-  if (!listeners.length) {
-    events.forEach((event) => {
-      window.removeEventListener(event, scheduler);
-    });
+const unsubscribeOnce = <N extends string, EK extends EventKey[]>(
+  namespace: N,
+  events: EK,
+): void => {
+  if (listenersMap[namespace].length) {
+    return;
   }
+
+  events.forEach((event) => {
+    window.removeEventListener(event, schedulersMap[namespace]);
+  });
+
+  delete listenersMap[namespace];
+  delete schedulersMap[namespace];
 };
 
-export const useStackListeners = () => useCallback(
+export const useStackListeners = <N extends string>(namespace: N) => useCallback(
   <EK extends EventKey[], C extends Listener<EK>>(events: EK, callback: C) => {
-    subscribeOnce(events);
-
-    addListener(callback);
+    subscribeOnce(namespace, events);
+    addListener(namespace, callback);
 
     return () => {
-      removeListener(callback);
-      unsubscribeOnce(events);
+      removeListener(namespace, callback);
+      unsubscribeOnce(namespace, events);
     };
   },
   [],

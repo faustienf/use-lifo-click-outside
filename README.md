@@ -1,10 +1,10 @@
 [<img src="https://raw.githubusercontent.com/faustienf/use-on-click-outside/main/public/layers.png" width="300">](https://faustienf.github.io/use-on-click-outside/?path=/story/example-layer--regular)
-# useOnClickOutside()
+# ⚛️ useOnClickOutside()
 
 React hook for track click outside element. [Demo](https://faustienf.github.io/use-on-click-outside/?path=/story/example-layer--regular)
 
 ## Features
-- using stack - [useStackListeners()](https://github.com/faustienf/use-on-click-outside/blob/main/src/use-stack-listeners.ts) of listeners instead of queue
+- using stack - [`useStackListeners()`](https://github.com/faustienf/use-on-click-outside/blob/main/src/use-stack-listeners.ts) of listeners instead of queue
 - supports several listeners with portal
 
 ## Usage
