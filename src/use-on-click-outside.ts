@@ -3,8 +3,8 @@ import { useEffect, RefObject } from 'react';
 type Listener = (event: MouseEvent | TouchEvent) => boolean;
 
 // using for .some()
-const next = () => false;
-const stop = () => true;
+const next = (): boolean => false;
+const stop = (): boolean => true;
 
 const listeners: Listener[] = [];
 
@@ -12,7 +12,7 @@ const addListener = (newListener: Listener): void => {
   listeners.unshift(newListener);
 };
 
-const removeListener = (targetListener: Listener) => {
+const removeListener = (targetListener: Listener): void => {
   listeners.some((listener, index) => {
     if (listener === targetListener) {
       listeners.splice(index, 1);
@@ -27,14 +27,14 @@ const scheduler = (event: MouseEvent | TouchEvent): void => {
   listeners.some((listener) => listener(event));
 };
 
-const sunbscribeOnce = () => {
+const subscribeOnce = (): void => {
   if (!listeners.length) {
     window.addEventListener('mousedown', scheduler);
     window.addEventListener('touchstart', scheduler);
   }
 };
 
-const unsunbscribeOnce = () => {
+const unsubscribeOnce = (): void => {
   if (!listeners.length) {
     window.removeEventListener('mousedown', scheduler);
     window.removeEventListener('touchstart', scheduler);
@@ -55,7 +55,7 @@ const getElementsFromPoint = (pageX: number, pageY: number): Element[] => {
     // @ts-ignore
     : document.msElementsFromPoint(pageX, pageY);
 
-  return elements;
+  return Array.from(elements);
 };
 
 /**
@@ -72,7 +72,7 @@ export const useOnClickOutside = (
 ): void => {
   useEffect(
     () => {
-      sunbscribeOnce();
+      subscribeOnce();
 
       const handler = (event: MouseEvent | TouchEvent): boolean => {
         const target = ref.current;
@@ -94,7 +94,7 @@ export const useOnClickOutside = (
 
       return () => {
         removeListener(handler);
-        unsunbscribeOnce();
+        unsubscribeOnce();
       };
     },
     [ref, callback],
