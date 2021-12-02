@@ -25,8 +25,8 @@ const modalRef = useRef(null);
 const selectOptionsRef = useRef(null);
 
 // order of calls is important! Look for useStackListeners()
-/* 2nd call */ -> useOnClickOutside(modalRef, onModalClose);
-/* 1st call */ -> useOnClickOutside(selectOptionsRef, onSelectOptionsClose);
+/* 2nd call */ useOnClickOutside(modalRef, onModalClose);
+/* 1st call */ useOnClickOutside(selectOptionsRef, onSelectOptionsClose);
 
 <Portal>
   <Modal ref={ref}>
