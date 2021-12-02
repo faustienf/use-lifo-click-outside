@@ -1,45 +1,5 @@
 import { useEffect, RefObject } from 'react';
-
-type Listener = (event: MouseEvent | TouchEvent) => boolean;
-
-// using for .some()
-const next = (): boolean => false;
-const stop = (): boolean => true;
-
-const listeners: Listener[] = [];
-
-const addListener = (newListener: Listener): void => {
-  listeners.unshift(newListener);
-};
-
-const removeListener = (targetListener: Listener): void => {
-  listeners.some((listener, index) => {
-    if (listener === targetListener) {
-      listeners.splice(index, 1);
-      return stop();
-    }
-
-    return next();
-  });
-};
-
-const scheduler = (event: MouseEvent | TouchEvent): void => {
-  listeners.some((listener) => listener(event));
-};
-
-const subscribeOnce = (): void => {
-  if (!listeners.length) {
-    window.addEventListener('mousedown', scheduler);
-    window.addEventListener('touchstart', scheduler);
-  }
-};
-
-const unsubscribeOnce = (): void => {
-  if (!listeners.length) {
-    window.removeEventListener('mousedown', scheduler);
-    window.removeEventListener('touchstart', scheduler);
-  }
-};
+import { useStackListeners } from './use-stack-listeners';
 
 const getPoint = (event: MouseEvent | TouchEvent): [number, number] => {
   const { pageX, pageY } = event instanceof MouseEvent
@@ -70,11 +30,12 @@ export const useOnClickOutside = (
   ref: RefObject<HTMLElement>,
   callback: (event: MouseEvent | TouchEvent) => void,
 ): void => {
-  useEffect(
-    () => {
-      subscribeOnce();
+  const addListener = useStackListeners();
 
-      const handler = (event: MouseEvent | TouchEvent): boolean => {
+  useEffect(
+    () => addListener(
+      ['mousedown', 'touchstart'],
+      (next, event) => {
         const target = ref.current;
         if (!target) {
           return next();
@@ -87,16 +48,9 @@ export const useOnClickOutside = (
           callback(event);
         }
 
-        return stop();
-      };
-
-      addListener(handler);
-
-      return () => {
-        removeListener(handler);
-        unsubscribeOnce();
-      };
-    },
-    [ref, callback],
+        return undefined;
+      },
+    ),
+    [ref, callback, addListener],
   );
 };
