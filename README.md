@@ -4,7 +4,7 @@
 React hook for track click outside element. [Demo](https://faustienf.github.io/use-on-click-outside/?path=/story/example-layer--regular)
 
 ## Features
-- using stack of listeners instead of queue
+- using stack - [useStackListeners()](https://github.com/faustienf/use-on-click-outside/blob/main/src/use-stack-listeners.ts) of listeners instead of queue
 - supports several listeners with portal
 
 ## Usage
@@ -24,8 +24,9 @@ Using several listeners with portal
 const modalRef = useRef(null);
 const selectOptionsRef = useRef(null);
 
-useOnClickOutside(modalRef, onModalClose);
-useOnClickOutside(selectOptionsRef, onSelectOptionsClose);
+// order of calls is important! Look for useStackListeners()
+/* 2nd call */ -> useOnClickOutside(modalRef, onModalClose);
+/* 1st call */ -> useOnClickOutside(selectOptionsRef, onSelectOptionsClose);
 
 <Portal>
   <Modal ref={ref}>
