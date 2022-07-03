@@ -1,4 +1,4 @@
-[<img src="https://raw.githubusercontent.com/faustienf/use-on-click-outside/main/public/layers.png" width="300">](https://faustienf.github.io/use-on-click-outside/?path=/story/example-layer--regular)
+[<img src="https://raw.githubusercontent.com/faustienf/use-click-outside/main/layers.png" width="300">](https://faustienf.github.io/use-on-click-outside/?path=/story/example-layer--regular)
 # ⚛️ useOnClickOutside()
 
 React hook for track click outside element. [Demo](https://faustienf.github.io/use-on-click-outside/?path=/story/example-layer--regular)
