@@ -1,0 +1,24 @@
+.button {
+  background-color: #07f;
+  padding: 0 16px;
+  height: 32px;
+  margin: 0;
+  border: 0;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 0 2px 8px -2px #07f;
+  border-radius: 4px;
+}
+
+.button:active {
+  transform: scale(0.96);
+}
+
+.button::before {
+  content: "";
+  background-color: rgba(255, 255, 255, 0.9);
+  height: 10px;
+  width: 80px;
+  border-radius: 5px;
+}

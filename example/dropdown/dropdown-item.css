@@ -1,0 +1,12 @@
+.dropdown-item {
+  padding: 8px 16px;
+}
+
+.dropdown-item::before {
+  display: block;
+  content: "";
+  background-color: rgba(0, 0, 0, 0.8);
+  height: 10px;
+  width: 110px;
+  border-radius: 5px;
+}
