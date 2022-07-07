@@ -1,14 +1,39 @@
 {
-  "name": "use-click-outside",
-  "private": true,
-  "version": "0.0.0",
+  "name": "lifo-click-outside",
+  "version": "1.0.0",
+  "description": "Detect clicks outside of elements",
+  "author": "@faustienf",
+  "source": "src/index.ts",
+  "main": "dist/index.cjs",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "LICENSE",
+    "README"
+  ],
+  "homepage": "https://github.com/faustienf/lifo-click-outside",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/faustienf/lifo-click-outside.git"
+  },
+  "license": "MIT",
+  "keywords": [
+    "lifo-click-outside",
+    "use-lifo-click-outside",
+    "subscription-stack",
+    "click-outside",
+    "clickoutside",
+    "react-click-outside",
+    "react-click-away",
+    "lifo",
+    "react"
+  ],
   "scripts": {
     "start": "vite example",
-    "build": "tsc && vite build",
-    "preview": "vite preview"
+    "build": "tsc && rm -rf ./dist/* && rollup --config"
   },
   "dependencies": {
-    "subscription-stack": "latest"
+    "subscription-stack": "1.1.0"
   },
   "peerDependencies": {
     "react": ">=16.8",
