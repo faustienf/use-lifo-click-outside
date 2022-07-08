@@ -1,1 +1,1 @@
-export { useLifoClickOutside, isClickedOutside } from "./lifo-click-outside";
+export { useLifoClickOutside } from "./use-lifo-click-outside";

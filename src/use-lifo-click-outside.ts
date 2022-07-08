@@ -21,7 +21,7 @@ const getElementsFromPoint = ([pointX, pointY]: [
   return Array.from(elements);
 };
 
-export const isClickedOutside = (
+const isClickedOutside = (
   target: HTMLElement,
   event: MouseEvent | TouchEvent
 ): boolean => {
@@ -29,7 +29,7 @@ export const isClickedOutside = (
   return !elements.includes(target);
 };
 
-export const useLifoClick = createSubscriptionStackHook();
+const useLifoClick = createSubscriptionStackHook();
 
 /**
  * @example

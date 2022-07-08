@@ -17,5 +17,5 @@
     "declaration": true,
     "jsx": "react-jsx"
   },
-  "include": ["src", "example", "tests"]
+  "include": ["./src/**/*"]
 }

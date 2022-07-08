@@ -1,24 +1,24 @@
 {
-  "name": "lifo-click-outside",
-  "version": "1.0.0",
+  "name": "use-lifo-click-outside",
+  "version": "0.0.0",
   "description": "Detect clicks outside of elements",
   "author": "@faustienf",
   "source": "src/index.ts",
-  "main": "dist/index.cjs",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "files": [
     "dist",
     "LICENSE",
     "README"
   ],
-  "homepage": "https://github.com/faustienf/lifo-click-outside",
+  "homepage": "https://github.com/faustienf/use-lifo-click-outside",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/faustienf/lifo-click-outside.git"
+    "url": "git+https://github.com/faustienf/use-lifo-click-outside.git"
   },
   "license": "MIT",
   "keywords": [
-    "lifo-click-outside",
     "use-lifo-click-outside",
     "subscription-stack",
     "click-outside",
@@ -30,10 +30,10 @@
   ],
   "scripts": {
     "start": "vite example",
-    "build": "tsc && rm -rf ./dist/* && rollup --config"
+    "build": "tsc && rm -rf ./dist/* && rollup -c"
   },
   "dependencies": {
-    "subscription-stack": "1.1.0"
+    "subscription-stack": "1.1.1"
   },
   "peerDependencies": {
     "react": ">=16.8",
@@ -43,6 +43,9 @@
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
     "@vitejs/plugin-react": "^1.3.0",
+    "glob": "^8.0.3",
+    "rollup-plugin-terser": "^7.0.2",
+    "rollup-plugin-typescript2": "^0.32.1",
     "typescript": "^4.6.3",
     "vite": "^2.9.9"
   }
