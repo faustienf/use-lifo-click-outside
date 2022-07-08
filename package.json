@@ -1,6 +1,6 @@
 {
   "name": "use-lifo-click-outside",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Detect clicks outside of elements",
   "author": "@faustienf",
   "source": "src/index.ts",
@@ -30,7 +30,8 @@
   ],
   "scripts": {
     "start": "vite example",
-    "build": "tsc && rm -rf ./dist/* && rollup -c"
+    "tsc": "tsc --noEmit true",
+    "build": "npm run tsc && rm -rf ./dist/* && rollup -c"
   },
   "dependencies": {
     "subscription-stack": "1.1.1"
