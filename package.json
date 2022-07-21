@@ -34,7 +34,7 @@
     "build": "npm run tsc && rm -rf ./dist/* && rollup -c"
   },
   "dependencies": {
-    "subscription-stack": "1.1.1"
+    "subscription-stack": "^1.2.2"
   },
   "peerDependencies": {
     "react": ">=16.8",

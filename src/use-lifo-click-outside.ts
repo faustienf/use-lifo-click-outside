@@ -1,5 +1,5 @@
 import { RefObject } from "react";
-import { createSubscriptionStackHook } from "subscription-stack";
+import { createSubscriptionStackHook } from "subscription-stack/react";
 
 const getPoint = (event: MouseEvent | TouchEvent): [number, number] => {
   const { clientX, clientY } =
